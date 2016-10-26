@@ -16,7 +16,7 @@ public class ConnectionLauncher {
 	public static void main(String[] args) throws SQLException {
 		
 		Connection connection = ConnectionFactory.getConnectionFactory("localhost", 5432, "postgres", "cuttlefern").getConnection("postgres", "bondstone");
-	
+		
 		executeQueries(connection);
 		
 	}
@@ -33,7 +33,7 @@ public class ConnectionLauncher {
 				//look up the value of a column by the 'title' of the column
 				String name = resultSet.getString("name");
 				
-				//or look up the value of a column by the 'index' of the column 
+				//or you can look up the value of a column by the 'index' of the column 
 				int id = resultSet.getInt(1);
 				
 				log.info("Found a user! The users name is [" + name + "] and the users id is [" + id + "]");
@@ -57,6 +57,7 @@ public class ConnectionLauncher {
 				log.info("That means that " + joinResults.getString("name") + " has the role of " + joinResults.getString("role") + "!");
 				
 				log.info("Let's promote " + joinResults.getString("name") + " to Admin!");				
+				//But wait, we have 2 'id' columns...
 				promoteToAdmin(joinResults.getInt("id"), connection);
 				log.info("Awesome! Now [" + joinResults.getString("name") + "] has been promoted to [" + joinResults.getString("role") + "] !");
 				log.debug("<<< wait wtf, what just happened? I thought we promoted that guy? >>>");
